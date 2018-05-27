@@ -1,0 +1,21 @@
+{
+  "name": "fetch",
+  "version": "1.0.0",
+  "description": "about ajax package",
+  "main": "index.js",
+  "repository": "https://github.com/Grewer/fetch.git",
+  "author": "Grewer<grewer@grewer.cn>",
+  "license": "MIT",
+  "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-es2015": "^6.24.1"
+  },
+  "scripts": {
+    "build": "babel index.js -d dist"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  }
+}
