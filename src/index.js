@@ -17,15 +17,11 @@ function xhr(type, url, params, config) {
       url += '?' + paramsStr.substr(1)
       params = null
     }
-    xhr.responseType = 'json'; // todo
+    xhr.responseType = config.responseType; // todo
     xhr.open(method, url);
-    // xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    // xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded"); // formdata
     xhr.timeout = config.timeout;
-// xhr.onreadystatechange = () => {
-//   if (xhr.readyState === 4 && xhr.status === 200) {
-//     console.log(xhr.responseText)
-//   }
-// }
+    // xhr.setRequestHeader('Content-type', 'application/json')
     xhr.onload = e => {
       resolve(e.target.response)
     };
@@ -47,6 +43,7 @@ const Fetch = {
     },
     headers: {},
     timeout: 10000,
+    responseType: 'json'
   },
   post(url, params, config) {
     return this.ajax('post', url, params, config)

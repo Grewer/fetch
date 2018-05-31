@@ -9,8 +9,9 @@ light ajax plugin
 #### browser
 ```html
 <script src="fetch.js"></script>
-
+```
 #### webpack 
+
 ```js
 import fetch from 'fetch'
 fetch.config.baseUrl = 'http://api.com'
