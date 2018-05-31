@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax demo</title>
+</head>
+<body>
+<script src="../src/index.js"></script>
+<button onclick="send_get()">send_get</button>
+<button onclick="send_get_noQuery()">send_get_noQuery</button>
+<script type="text/javascript">
+  fetch.config.baseUrl = 'http://192.168.60.197:8080/'
+
+  function send_get() {
+    fetch.get('htmldemo/phprev/', {name: 1}).then(response => {
+      console.log(response)
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+  function send_get_noQuery() {
+    fetch.get('htmldemo/phprev/').then(response => {
+      console.log(response)
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+</script>
+</body>
+</html>
