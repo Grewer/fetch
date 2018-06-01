@@ -17,12 +17,16 @@ import fetch from 'fetch'
 fetch.config.baseUrl = 'http://api.com'
 fetch.config.timeout = 5000
 ```
-**config-list:**
-- baseUrl 基础url
-- timeout 超时
-- headers 头部
-- transformRequest  param 转换
+**config-table:**
 
+param | explain | type
+------| --------| ----
+baseUrl | 基础url,请求时会加到URL前面| string
+timeout | 超时时间,默认10000 | number
+headers | 头部请求setRequestHeader,默认空| obj 
+transformRequest | 对于数据的转换(get,post会自动转数据) |Function(data)
+responseType | 数据返回类型,默认json | string
+withCredentials | 请求时是否带上cookie,默认false | boolean
 
 ### Usege
 

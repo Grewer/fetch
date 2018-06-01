@@ -25,10 +25,16 @@ function xhr(type, url, params, config) {
     if (type === 'post') {
       xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); // formdata
     }
+
     // config start
     xhr.responseType = config.responseType;
     xhr.withCredentials = config.withCredentials;// true 头部带cookie false不带
     xhr.timeout = config.timeout;
+    let headers = config.headers || {};
+    let headers_keys = Object.keys(headers);
+    headers_keys.forEach(i => {
+      xhr.setRequestHeader(i, headers[i])
+    })
     // config end
 
     xhr.onload = e => {
@@ -40,7 +46,6 @@ function xhr(type, url, params, config) {
     xhr.onerror = e => {
       reject(e.target)
     }
-    console.log(params)
     xhr.send(params);
   })
 }
@@ -57,21 +62,29 @@ const Fetch = {
     withCredentials: false
   },
   post(url, params, config) {
+    params = this.config.transformRequest(params)
     params = json2str(params).substr(1)
     return this.ajax('post', url, params, config)
   },
   get(url, params, config) {
+    params = this.config.transformRequest(params)
     let newParams = json2str(params)
     if (newParams) {
       url += '?' + json2str(params).substr(1)
     }
+    // todo formdata
     params = null
     return this.ajax('get', url, params, config)
   },
-  ajax(type, url, params, config) {
-    let transformParams = this.config.transformRequest(params)
-    // todo config //覆盖this.config
-    return xhr(type, url, transformParams, this.config)
+  ajax(type, url, params, config = {}) {
+    //config //覆盖this.config
+    let headers_keys = Object.keys(config);
+    headers_keys.forEach(i => {
+      if (this.config[i] !== void 0) {
+        this.config[i] = config[i]
+      }
+    })
+    return xhr(type, url, params, this.config)
   }
 }
 
