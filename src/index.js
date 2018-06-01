@@ -4,24 +4,33 @@
 // promise 包装
 // data 转换
 // get post 不同的数据转换
+
+const json2str = (obj = {}) => {
+  let keys = Object.keys(obj)
+  let str = ''
+  keys.forEach(i => {
+    str += '&' + encodeURIComponent(i) + '=' + encodeURIComponent(obj[i])
+  })
+  return str
+}
+
 function xhr(type, url, params, config) {
   return new Promise((resolve, reject) => {
     let xhr = new XMLHttpRequest();
     let method = type
     url = config.baseUrl + url
-    if (type === 'get') {
-      let paramsStr = ''
-      for (let i in params) {
-        paramsStr += `&${i}=${params[i]}`
-      }
-      url += '?' + paramsStr.substr(1)
-      params = null
-    }
-    xhr.responseType = config.responseType; // todo
+
     xhr.open(method, url);
-    // xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded"); // formdata
+
+    if (type === 'post') {
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); // formdata
+    }
+    // config start
+    xhr.responseType = config.responseType;
+    xhr.withCredentials = config.withCredentials;// true 头部带cookie false不带
     xhr.timeout = config.timeout;
-    // xhr.setRequestHeader('Content-type', 'application/json')
+    // config end
+
     xhr.onload = e => {
       resolve(e.target.response)
     };
@@ -31,7 +40,8 @@ function xhr(type, url, params, config) {
     xhr.onerror = e => {
       reject(e.target)
     }
-    xhr.send(JSON.stringify(params));
+    console.log(params)
+    xhr.send(params);
   })
 }
 
@@ -43,12 +53,19 @@ const Fetch = {
     },
     headers: {},
     timeout: 10000,
-    responseType: 'json'
+    responseType: 'json',
+    withCredentials: false
   },
   post(url, params, config) {
+    params = json2str(params).substr(1)
     return this.ajax('post', url, params, config)
   },
   get(url, params, config) {
+    let newParams = json2str(params)
+    if (newParams) {
+      url += '?' + json2str(params).substr(1)
+    }
+    params = null
     return this.ajax('get', url, params, config)
   },
   ajax(type, url, params, config) {

@@ -7,15 +7,24 @@
 <body>
 <script src="../src/index.js"></script>
 <button onclick="send_get()">send_get</button>
+<button onclick="send_get_noquery()">send_get_noquery</button>
 <div>----</div>
 <button onclick="send_post()">send_post</button>
+<button onclick="send_post_noquery()">send_post_noquery</button>
 
 <script type="text/javascript">
   fetch.config.baseUrl = 'http://192.168.60.197:8080/'
 
   // fetch.config.timeout = 3000
   function send_get() {
-    fetch.get('htmldemo/phprev/', {name: 1, tt: 2}).then(response => {
+    fetch.get('htmldemo/phprev/', {name: 'get', tt: '中文'}).then(response => {
+      console.log(response)
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+  function send_get_noquery() {
+    fetch.get('htmldemo/phprev/').then(response => {
       console.log(response)
     }).catch(err => {
       console.log(err)
@@ -23,7 +32,14 @@
   }
 
   function send_post() {
-    fetch.post('htmldemo/phprev/', {name: 1, tt: 2}).then(response => {
+    fetch.post('htmldemo/phprev/', {name: 'post', tt: '中文'}).then(response => {
+      console.log(response)
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+  function send_post_noquery() {
+    fetch.post('htmldemo/phprev/').then(response => {
       console.log(response)
     }).catch(err => {
       console.log(err)
