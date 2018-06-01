@@ -1,11 +1,7 @@
 'use strict';
 
 // TODO list
-// 接收config参数
 // 发送,接受的中间层
-// promise 包装
-// data 转换
-// get post 不同的数据转换
 
 var json2str = function json2str() {
   var obj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -84,15 +80,11 @@ var Fetch = {
     var _this = this;
 
     //config //覆盖this.config
-    if (config) {
-      var config_keys = Object.keys(this.config);
-      config_keys.forEach(function (i) {
-        if (config[i] === void 0) {
-          config[i] = _this.config[i];
-        }
-      });
-    }
-    return xhr(type, url, params, config || this.config);
+    return xhr(type, url, params, config ? (Object.keys(this.config).forEach(function (i) {
+      if (config[i] === void 0) {
+        config[i] = _this.config[i];
+      }
+    }), config) : this.config);
   }
 };
 

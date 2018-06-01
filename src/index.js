@@ -1,24 +1,20 @@
 // TODO list
-// 接收config参数
 // 发送,接受的中间层
-// promise 包装
-// data 转换
-// get post 不同的数据转换
 
 const json2str = (obj = {}) => {
-  let keys = Object.keys(obj)
-  let str = ''
+  let keys = Object.keys(obj);
+  let str = '';
   keys.forEach(i => {
     str += '&' + encodeURIComponent(i) + '=' + encodeURIComponent(obj[i])
-  })
+  });
   return str
-}
+};
 
 function xhr(type, url, params, config) {
   return new Promise((resolve, reject) => {
     let xhr = new XMLHttpRequest();
-    let method = type
-    url = config.baseUrl + url
+    let method = type;
+    url = config.baseUrl + url;
 
     xhr.open(method, url);
 
@@ -34,7 +30,7 @@ function xhr(type, url, params, config) {
     let headers_keys = Object.keys(headers);
     headers_keys.forEach(i => {
       xhr.setRequestHeader(i, headers[i])
-    })
+    });
     // config end
 
     xhr.onload = e => {
@@ -45,7 +41,7 @@ function xhr(type, url, params, config) {
     };
     xhr.onerror = e => {
       reject(e.target)
-    }
+    };
     xhr.send(params);
   })
 }
@@ -62,34 +58,32 @@ const Fetch = {
     withCredentials: false
   },
   post(url, params, config) {
-    params = this.config.transformRequest(params)
-    params = params instanceof FormData ? params : json2str(params).substr(1)
+    params = this.config.transformRequest(params);
+    params = params instanceof FormData ? params : json2str(params).substr(1);
     return this.ajax('post', url, params, config)
   },
   get(url, params, config) {
-    params = this.config.transformRequest(params)
-    let newParams = json2str(params)
+    params = this.config.transformRequest(params);
+    let newParams = json2str(params);
     if (newParams) {
       url += '?' + json2str(params).substr(1)
     }
-    params = null
+    params = null;
     return this.ajax('get', url, params, config)
   },
   ajax(type, url, params, config) {
-    //config //覆盖this.config
-    if (config) {
-      let config_keys = Object.keys(this.config);
-      config_keys.forEach(i => {
+    // 合并config
+    return xhr(type, url, params, config ? (
+      Object.keys(this.config).forEach(i => {
         if (config[i] === void 0) {
           config[i] = this.config[i]
         }
-      })
-    }
-    return xhr(type, url, params, config || this.config)
+      }), config) : this.config
+    )
   }
-}
+};
 
-let fetch = Object.create(Fetch)
+const fetch = Object.create(Fetch);
 
 window.fetch = fetch
 

@@ -39,5 +39,9 @@ fetch.get('get/name',{id:1}).then(response=>{
 })
 // post
 fetch.post('get/name',{id:2}).then(response=>{}).catch(error=>{})
-// 头部 中间层
+
+//FormData
+let data = new FormData()
+data.append('name','formdata')
+fetch.post('htmldemo/phprev/', data).then(response => {}).catch(err => {})
 ```
