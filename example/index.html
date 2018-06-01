@@ -14,6 +14,8 @@
 <button onclick="send_post_noquery()">send_post_noquery</button>
 <h3>config</h3>
 <button onclick="send_config()">send_config</button>
+<h3>FormData</h3>
+<button onclick="send_FormData()">send_FormData</button>
 
 <script type="text/javascript">
   fetch.config.baseUrl = 'http://192.168.60.197:8080/'
@@ -52,6 +54,15 @@
 
   function send_config() {
     fetch.get('htmldemo/phprev/', {name: 'post', tt: '中文'},{responseType:''}).then(response => {
+      console.log(response)
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+  function send_FormData() {
+    let data = new FormData()
+    data.append('name','formdata')
+    fetch.post('htmldemo/phprev/', data).then(response => {
       console.log(response)
     }).catch(err => {
       console.log(err)

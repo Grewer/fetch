@@ -22,8 +22,8 @@ function xhr(type, url, params, config) {
 
     xhr.open(method, url);
 
-    if (type === 'post') {
-      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); // formdata
+    if (type === 'post' && params.length) {
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     }
 
     // config start
@@ -63,7 +63,7 @@ const Fetch = {
   },
   post(url, params, config) {
     params = this.config.transformRequest(params)
-    params = json2str(params).substr(1)
+    params = params instanceof FormData ? params : json2str(params).substr(1)
     return this.ajax('post', url, params, config)
   },
   get(url, params, config) {
@@ -72,19 +72,20 @@ const Fetch = {
     if (newParams) {
       url += '?' + json2str(params).substr(1)
     }
-    // todo formdata
     params = null
     return this.ajax('get', url, params, config)
   },
-  ajax(type, url, params, config = {}) {
+  ajax(type, url, params, config) {
     //config //覆盖this.config
-    let headers_keys = Object.keys(config);
-    headers_keys.forEach(i => {
-      if (this.config[i] !== void 0) {
-        this.config[i] = config[i]
-      }
-    })
-    return xhr(type, url, params, this.config)
+    if (config) {
+      let config_keys = Object.keys(this.config);
+      config_keys.forEach(i => {
+        if (config[i] === void 0) {
+          config[i] = this.config[i]
+        }
+      })
+    }
+    return xhr(type, url, params, config || this.config)
   }
 }
 
