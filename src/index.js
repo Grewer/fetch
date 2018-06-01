@@ -9,8 +9,12 @@ const json2str = (obj = {}) => {
   });
   return str
 };
+const middle = function (data) {
+  console.log(data)
+  return data
+}
 
-function xhr(type, url, params, config) {
+function xhr(type, url, params, config, interceptor) {
   return new Promise((resolve, reject) => {
     let xhr = new XMLHttpRequest();
     let method = type;
@@ -34,13 +38,13 @@ function xhr(type, url, params, config) {
     // config end
 
     xhr.onload = e => {
-      resolve(e.target.response)
+      resolve(interceptor.success(e.target.response))
     };
     xhr.ontimeout = e => {
-      reject(e.target)
+      reject(interceptor.fail(e.target))
     };
     xhr.onerror = e => {
-      reject(e.target)
+      reject(interceptor.fail(e.target))
     };
     xhr.send(params);
   })
@@ -56,6 +60,14 @@ const Fetch = {
     timeout: 10000,
     responseType: 'json',
     withCredentials: false
+  },
+  interceptor: {
+    success(data) {
+      return data
+    },
+    fail(data) {
+      return data
+    }
   },
   post(url, params, config) {
     params = this.config.transformRequest(params);
@@ -74,12 +86,12 @@ const Fetch = {
   ajax(type, url, params, config) {
     // 合并config
     return xhr(type, url, params, config ? (
-      Object.keys(this.config).forEach(i => {
-        if (config[i] === void 0) {
-          config[i] = this.config[i]
-        }
-      }), config) : this.config
-    )
+        Object.keys(this.config).forEach(i => {
+          if (config[i] === void 0) {
+            config[i] = this.config[i]
+          }
+        }), config) : this.config
+      , this.interceptor)
   }
 };
 

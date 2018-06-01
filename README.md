@@ -1,8 +1,8 @@
 ## Fetch
 
-封装 ajax 插件
+> 秉承着少即是多的原理我封装了该插件,封装了post和get两个api,并且兼容FormData
 
-light ajax plugin 
+封装 ajax 插件
 
 ### Download
 
@@ -44,4 +44,15 @@ fetch.post('get/name',{id:2}).then(response=>{}).catch(error=>{})
 let data = new FormData()
 data.append('name','formdata')
 fetch.post('htmldemo/phprev/', data).then(response => {}).catch(err => {})
+
+// 中间层
+fetch.interceptor.success = res => {
+   console.log('res', res)
+   return res
+}
+
+fetch.interceptor.fail = err => {
+   console.log('err', err)
+   return err
+}
 ```
