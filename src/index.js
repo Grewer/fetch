@@ -1,6 +1,3 @@
-// TODO list
-// 发送,接受的中间层
-
 const json2str = (obj = {}) => {
   let keys = Object.keys(obj);
   let str = '';
@@ -9,10 +6,6 @@ const json2str = (obj = {}) => {
   });
   return str
 };
-const middle = function (data) {
-  console.log(data)
-  return data
-}
 
 function xhr(type, url, params, config, interceptor) {
   return new Promise((resolve, reject) => {
@@ -97,6 +90,4 @@ const Fetch = {
 
 const fetch = Object.create(Fetch);
 
-window.fetch = fetch
-
-// export default fetch
+export default fetch
