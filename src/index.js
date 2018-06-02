@@ -1,7 +1,6 @@
 const json2str = (obj = {}) => {
-  let keys = Object.keys(obj);
   let str = '';
-  keys.forEach(i => {
+  Object.keys(obj).forEach(i => {
     str += '&' + encodeURIComponent(i) + '=' + encodeURIComponent(obj[i])
   });
   return str
@@ -21,7 +20,7 @@ function xhr(type, url, params, config, interceptor) {
 
     // config start
     xhr.responseType = config.responseType;
-    xhr.withCredentials = config.withCredentials;// true 头部带cookie false不带
+    xhr.withCredentials = config.withCredentials;
     xhr.timeout = config.timeout;
     let headers = config.headers || {};
     let headers_keys = Object.keys(headers);
@@ -85,6 +84,15 @@ const Fetch = {
           }
         }), config) : this.config
       , this.interceptor)
+  },
+  install(Vue, options) {
+    try {
+      options && options(this.config)
+    } catch (e) {
+      console.error('options 必须是一个函数')
+    }
+    Vue.prototype.$get = this.get
+    Vue.prototype.$post = this.get
   }
 };
 

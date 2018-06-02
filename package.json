@@ -1,10 +1,19 @@
 {
-  "name": "fetch",
-  "version": "1.0.0",
+  "name": "gfetch",
+  "version": "1.2.0",
   "description": "about ajax package",
   "main": "src/index.js",
   "repository": "https://github.com/Grewer/fetch.git",
   "author": "Grewer<grewer@grewer.cn>",
+  "keywords": [
+    "ajax",
+    "gfetch",
+    "XMLHttpRequest",
+    "simple XMLHttpRequest",
+    "vue",
+    "vue.js",
+    "vue2.js"
+  ],
   "license": "MIT",
   "dependencies": {
     "babel-core": "^6.26.3",

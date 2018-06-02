@@ -1,21 +1,34 @@
 ## Fetch
 
-> 秉承着少即是多的原理我封装了该插件,封装了post和get两个api,并且兼容FormData
+> 秉承着少即是多的原理封装了该插件,他拥有post和get两个主要api,并且兼容FormData
 
 封装 ajax 插件
 
 ### Download
 
+
 #### browser
 ```html
-<script src="fetch.js"></script>
+// download it 
+<script src="dist/fetch.min.js"></script>
 ```
-#### webpack 
+
+#### npm
+```bash
+npm install gfetch -- save 
+```
 
 ```js
-import fetch from 'fetch'
+import fetch from 'gfetch'
 fetch.config.baseUrl = 'http://api.com'
 fetch.config.timeout = 5000
+
+// or in Vue 
+import fetch from 'gfetch'
+Vue.use(fetch, config => {
+  config.baseUrl = 'http://api.com'
+  config.timeout = 5000
+})
 ```
 **config-table:**
 
@@ -55,4 +68,12 @@ fetch.interceptor.fail = err => {
    console.log('err', err)
    return err
 }
+
+
+// in Vue
+// after use
+
+// script
+this.$get().then(res=>{}).catch(err=>{})
+this.$post().then(res=>{}).catch(err=>{})
 ```
