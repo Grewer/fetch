@@ -9,10 +9,9 @@ const json2str = (obj = {}) => {
 function xhr(type, url, params, config, interceptor) {
   return new Promise((resolve, reject) => {
     let xhr = new XMLHttpRequest();
-    let method = type;
     url = config.baseUrl + url;
 
-    xhr.open(method, url);
+    xhr.open(type, url);
 
     if (type === 'post' && params.length) {
       xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -70,7 +69,7 @@ const Fetch = {
     params = this.config.transformRequest(params);
     let newParams = json2str(params);
     if (newParams) {
-      url += '?' + json2str(params).substr(1)
+      url += '?' + newParams.substr(1)
     }
     params = null;
     return this.ajax('get', url, params, config)
