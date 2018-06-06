@@ -5,7 +5,7 @@
     <title>ajax demo</title>
 </head>
 <body>
-<script src="../dist/main.js"></script>
+<script src="../dist/fetch.min.js"></script>
 <h3>get</h3>
 <button onclick="send_get()">send_get</button>
 <button onclick="send_get_noquery()">send_get_noquery</button>
@@ -17,8 +17,22 @@
 <h3>FormData</h3>
 <button onclick="send_FormData()">send_FormData</button>
 
+<script src="https://cdn.bootcss.com/Mock.js/1.0.1-beta3/mock-min.js"></script>
+<script>
+  // Mock.setup({
+  //   timeout: '1000-1500'
+  // })
+  // Mock.mock('http://192.168.60.197:8080/htmldemo/phprev/', {
+  //   data: {
+  //     list: '123'
+  //   }
+  // })
+</script>
+
 <script type="text/javascript">
   fetch.config.baseUrl = 'http://192.168.60.197:8080/'
+  fetch.config.timeout = 3000
+
   fetch.interceptor.success = res => {
     console.log('res', res)
     return res
@@ -28,7 +42,7 @@
     return err
   }
 
-  // fetch.config.timeout = 3000
+
   function send_get() {
     fetch.get('htmldemo/phprev/', {name: 'get', tt: '中文'}).then(response => {
       console.log(response)

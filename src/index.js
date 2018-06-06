@@ -27,9 +27,10 @@ function xhr(type, url, params, config, interceptor) {
       xhr.setRequestHeader(i, headers[i])
     });
     // config end
-
-    xhr.onload = e => {
-      resolve(interceptor.success(e.target.response))
+    xhr.onreadystatechange = function () {
+      if(xhr.readyState === 4 && xhr.status === 200) {
+        resolve(interceptor.success(xhr.response))
+      }
     };
     xhr.ontimeout = e => {
       reject(interceptor.fail(e.target))
