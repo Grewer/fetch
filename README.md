@@ -15,7 +15,7 @@
 
 #### npm
 ```bash
-npm install gfetch -- save 
+npm install gfetch --save 
 ```
 
 ```js
