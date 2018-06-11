@@ -1,9 +1,5 @@
 const json2str = (obj = {}) => {
-  let str = '';
-  Object.keys(obj).forEach(i => {
-    str += '&' + encodeURIComponent(i) + '=' + encodeURIComponent(obj[i])
-  });
-  return str
+  return Object.keys(obj).reduce((str, i) => str += encodeURIComponent(i) + '=' + encodeURIComponent(obj[i]) + '&', '')
 };
 
 function xhr(type, url, params, config, interceptor) {
