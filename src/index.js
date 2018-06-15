@@ -87,8 +87,9 @@ const Fetch = {
     } catch (e) {
       console.error('options 必须是一个函数')
     }
-    Vue.prototype.$get = this.get
-    Vue.prototype.$post = this.get
+    const that = this
+    Vue.prototype.$get = this.get.bind(that)
+    Vue.prototype.$post = this.post.bind(that)
   }
 };
 
