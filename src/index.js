@@ -2,42 +2,6 @@ const json2str = (obj = {}) => {
   return Object.keys(obj).reduce((str, i) => str += encodeURIComponent(i) + '=' + encodeURIComponent(obj[i]) + '&', '')
 };
 
-function xhr(type, url, params, config, interceptor) {
-  return new Promise((resolve, reject) => {
-    let xhr = new XMLHttpRequest();
-    url = config.baseUrl + url;
-
-    xhr.open(type, url);
-
-    if (type === 'post' && params.length) {
-      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    }
-
-    // config start
-    xhr.responseType = config.responseType;
-    xhr.withCredentials = config.withCredentials;
-    xhr.timeout = config.timeout;
-    let headers = config.headers || {};
-    let headers_keys = Object.keys(headers);
-    headers_keys.forEach(i => {
-      xhr.setRequestHeader(i, headers[i])
-    });
-    // config end
-    xhr.onreadystatechange = function () {
-      if(xhr.readyState === 4 && xhr.status === 200) {
-        resolve(interceptor.success(xhr.response))
-      }
-    };
-    xhr.ontimeout = e => {
-      reject(interceptor.fail(e.target))
-    };
-    xhr.onerror = e => {
-      reject(interceptor.fail(e.target))
-    };
-    xhr.send(params);
-  })
-}
-
 const Fetch = {
   config: {
     baseUrl: '',
@@ -93,6 +57,47 @@ const Fetch = {
   }
 };
 
+function xhr(type, url, params, config, interceptor) {
+  return new Promise((resolve, reject) => {
+    let xhr = new XMLHttpRequest();
+    url = config.baseUrl + url;
+
+    xhr.open(type, url);
+
+    if (type === 'post' && params.length) {
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    }
+
+    // config start
+    xhr.responseType = config.responseType;
+    xhr.withCredentials = config.withCredentials;
+    xhr.timeout = config.timeout;
+    let headers = config.headers || {};
+    let headers_keys = Object.keys(headers);
+    headers_keys.forEach(i => {
+      xhr.setRequestHeader(i, headers[i])
+    });
+    // config end
+    xhr.onreadystatechange = function () {
+      if(xhr.readyState === 4 && xhr.status === 200) {
+        resolve(interceptor.success(xhr.response))
+      }
+    };
+    xhr.ontimeout = e => {
+      reject(interceptor.fail(e.target))
+    };
+    xhr.onerror = e => {
+      reject(interceptor.fail(e.target))
+    };
+    xhr.send(params);
+  })
+}
+
+
 const fetch = Object.create(Fetch);
+
+
+
+
 
 export default fetch

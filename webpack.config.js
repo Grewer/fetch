@@ -1,5 +1,4 @@
 const path = require('path')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
 	module: {
@@ -8,22 +7,24 @@ module.exports = {
 				test: /\.js$/,
 				exclude: /node_modules/,
 				loader: 'babel-loader',
-
+        include:path.join(__dirname,'./src'),
 				options: {
-					presets: ['env']
+					presets: ['es2015']
 				}
 			}
 		]
 	},
 
-	plugins: [new UglifyJsPlugin()],
+	plugins: [],
 
 	entry: {
-		index: './index.js.js'
+		index: './src/index.js'
 	},
-
-	output: {
-		filename: 'fetch.min.js',
-		path: path.resolve(__dirname, 'dist')
-	}
+  output: {
+		filename: 'fetch.js',
+		path: path.resolve(__dirname, 'dist'),
+    library: 'fetch',
+    libraryTarget: 'commonjs-module',
+    libraryExport: "default",
+  }
 };
