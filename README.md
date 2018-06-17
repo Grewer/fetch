@@ -7,6 +7,12 @@
 ### Download
 
 
+#### browser
+```html
+// download it 
+<script src="dist/fetch.min.js"></script>
+```
+
 #### npm
 ```bash
 npm install gfetch --save 

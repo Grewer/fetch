@@ -1,8 +1,8 @@
 {
   "name": "gfetch",
-  "version": "2.0.0",
+  "version": "1.8.1",
   "description": "about ajax package",
-  "main": "dist/fetch.js",
+  "main": "src/index.js",
   "repository": "https://github.com/Grewer/fetch.git",
   "author": "Grewer<grewer@grewer.cn>",
   "keywords": [
@@ -17,7 +17,7 @@
   "license": "MIT",
   "dependencies": {},
   "scripts": {
-    "build": "webpack --mode production"
+    "build": "webpack --mode production ./index.js"
   },
   "babel": {
     "presets": [
