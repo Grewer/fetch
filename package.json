@@ -1,6 +1,6 @@
 {
   "name": "gfetch",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "about ajax package",
   "main": "src/fetch.js",
   "repository": "https://github.com/Grewer/fetch.git",

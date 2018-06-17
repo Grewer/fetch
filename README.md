@@ -6,6 +6,15 @@
 
 ### Download
 
+
+#### browser
+```html
+// download it 
+<script src="dist/fetch.min.js"></script>
+
+<script src="dist/fetch.js"></script> // Error !!
+```
+
 #### npm
 ```bash
 npm install gfetch --save 
