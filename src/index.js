@@ -1,5 +1,5 @@
 const json2str = (obj = {}) => {
-  return Object.keys(obj).reduce((str, i) => str += encodeURIComponent(i) + '=' + encodeURIComponent(obj[i]) + '&', '')
+  return Object.keys(obj).reduce((str, i) => str += '&' + encodeURIComponent(i) + '=' + encodeURIComponent(obj[i]), '')
 };
 
 const Fetch = {
@@ -79,7 +79,7 @@ function xhr(type, url, params, config, interceptor) {
     });
     // config end
     xhr.onreadystatechange = function () {
-      if(xhr.readyState === 4 && xhr.status === 200) {
+      if (xhr.readyState === 4 && xhr.status === 200) {
         resolve(interceptor.success(xhr.response))
       }
     };
@@ -95,9 +95,6 @@ function xhr(type, url, params, config, interceptor) {
 
 
 const fetch = Object.create(Fetch);
-
-
-
 
 
 export default fetch
