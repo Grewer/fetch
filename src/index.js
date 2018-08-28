@@ -79,15 +79,13 @@ function xhr(type, url, params, config, interceptor) {
     });
     // config end
     xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        resolve(interceptor.success(xhr.response))
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          resolve(interceptor.success(xhr))
+        } else {
+          reject(interceptor.fail(xhr))
+        }
       }
-    };
-    xhr.ontimeout = e => {
-      reject(interceptor.fail(e.target))
-    };
-    xhr.onerror = e => {
-      reject(interceptor.fail(e.target))
     };
     xhr.send(params);
   })
