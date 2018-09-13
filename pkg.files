@@ -1,0 +1,8 @@
+{
+  "files": [
+	  "index.js",
+	  "dist",
+	  "src",
+	  "README.md"
+	]
+}
