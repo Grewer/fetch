@@ -5,7 +5,7 @@
     <title>ajax demo</title>
 </head>
 <body>
-<script src="../dist/fetch.min.js"></script>
+<script src="../dist/fetch.browser.js"></script>
 <h3>get</h3>
 <button onclick="send_get()">send_get</button>
 <button onclick="send_get_noquery()">send_get_noquery</button>
@@ -30,7 +30,8 @@
 </script>
 
 <script type="text/javascript">
-  fetch.config.baseUrl = 'http://192.168.60.197:8080/'
+  console.log(window.fetch)
+  fetch.config.baseUrl = 'http://192.168.18.115:8080/'
   fetch.config.timeout = 3000
 
   fetch.interceptor.success = res => {

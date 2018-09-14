@@ -41,9 +41,10 @@ module.exports = [{
 		index: './src/index.js'
 	},
   output: {
-		filename: 'fetch.min.js',
+		filename: 'fetch.browser.js',
 		path: path.resolve(__dirname, 'dist'),
     library: 'fetch',
     libraryTarget: 'window',
+    libraryExport: "default",
   }
 }]

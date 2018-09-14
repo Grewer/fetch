@@ -10,9 +10,9 @@
 #### browser
 ```html
 // download it 
-<script src="dist/fetch.min.js"></script>
+<script src="dist/fetch.browser.js"></script>
 
-<script src="dist/fetch.js"></script> // Error !!
+// use window.fetch
 ```
 
 #### npm
