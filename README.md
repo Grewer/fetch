@@ -2,7 +2,7 @@
 
 > 秉承着少即是多的原理封装了该插件,他拥有post和get两个主要api,并且兼容FormData
 
-封装 ajax 插件
+封装 ajax 请求插件 轻量级 大小为2.68KB
 
 ### Download
 
@@ -42,6 +42,15 @@ headers | 头部请求setRequestHeader,默认空| obj
 transformRequest | 对于数据的转换(get,post会自动转数据) |Function(data)
 responseType | 数据返回类型,默认json | string
 withCredentials | 请求时是否带上cookie,默认false | boolean
+
+
+### send methods
+```
+fetch.get(url,data,config)
+fetch.post(url,data,config)
+fetch.put(url,data,config)
+fetch.delete(url,data,config)
+```
 
 ### Usege
 

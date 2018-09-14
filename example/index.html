@@ -12,6 +12,10 @@
 <h3>post</h3>
 <button onclick="send_post()">send_post</button>
 <button onclick="send_post_noquery()">send_post_noquery</button>
+<h3>put</h3>
+<button onclick="send_put()">send_put</button>
+<h3>delete</h3>
+<button onclick="send_delete()">send_delete</button>
 <h3>config</h3>
 <button onclick="send_config()">send_config</button>
 <h3>FormData</h3>
@@ -30,16 +34,16 @@
 </script>
 
 <script type="text/javascript">
-  console.log(window.fetch)
-  fetch.config.baseUrl = 'http://192.168.18.115:8080/'
+  // fetch.config.baseUrl = 'http://192.168.18.115:8080/'
+  fetch.config.baseUrl = 'http://localhost:8080/'
   fetch.config.timeout = 3000
 
   fetch.interceptor.success = res => {
-    console.log('res', res)
+    // console.log('res', res)
     return res
   }
   fetch.interceptor.fail = err => {
-    console.log('err', err)
+    // console.log('err', err)
     return err
   }
 
@@ -92,6 +96,19 @@
       console.log(response)
     }).catch(err => {
       console.log(err)
+    })
+  }
+
+
+  function send_put() {
+    fetch.put('htmldemo/phprev/', {name: 'put', tt: '中文'}).then(res => {
+      console.log(res)
+    })
+  }
+
+  function send_delete() {
+    fetch.delete('htmldemo/phprev/', {name: 'delete', tt: '中文'}).then(res => {
+      console.log(res)
     })
   }
 </script>

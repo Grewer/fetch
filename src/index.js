@@ -2,6 +2,14 @@ const json2str = (obj = {}) => {
   return Object.keys(obj).reduce((str, i) => str += '&' + encodeURIComponent(i) + '=' + encodeURIComponent(obj[i]), '')
 };
 
+const transformUrl = (url, params) => {
+  let newParams = json2str(params);
+  if (newParams) {
+    url += '?' + newParams.substr(1)
+  }
+  return url
+}
+
 const Fetch = {
   config: {
     baseUrl: '',
@@ -28,12 +36,18 @@ const Fetch = {
   },
   get(url, params, config) {
     params = this.config.transformRequest(params);
-    let newParams = json2str(params);
-    if (newParams) {
-      url += '?' + newParams.substr(1)
-    }
-    params = null;
-    return this.ajax('get', url, params, config)
+    url = transformUrl(url, params)
+    return this.ajax('get', url, null, config)
+  },
+  put(url, params, config) {
+    params = this.config.transformRequest(params);
+    params = json2str(params).substr(1);
+    return this.ajax('put', url, params, config)
+  },
+  delete(url, params, config) {
+    params = this.config.transformRequest(params);
+    url = transformUrl(url, params)
+    return this.ajax('delete', url, null, config)
   },
   ajax(type, url, params, config) {
     // 合并config
