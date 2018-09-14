@@ -35,7 +35,7 @@ Vue.use(fetch, config => {
 **config-table:**
 
 param | explain | type
-------| --------| ----
+----| ---------| ----
 baseUrl | 基础url,请求时会加到URL前面| string
 timeout | 超时时间,默认10000 | number
 headers | 头部请求setRequestHeader,默认空| obj 

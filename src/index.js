@@ -78,7 +78,7 @@ function xhr(type, url, params, config, interceptor) {
 
     xhr.open(type, url);
 
-    if (type === 'post' && params.length) {
+    if ((type === 'post' && params.length) || type === 'put') {
       xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     }
 
