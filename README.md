@@ -2,7 +2,7 @@
 
 > 秉承着少即是多的原理封装了该插件,他拥有post和get两个主要api,并且兼容FormData
 
-封装 ajax 请求插件 轻量级 大小为2.68KB
+封装 ajax 请求插件 轻量级 大小为2.75KB
 
 ### Download
 

@@ -92,12 +92,20 @@ function xhr(type, url, params, config, interceptor) {
       xhr.setRequestHeader(i, headers[i])
     });
     // config end
+
     xhr.onreadystatechange = function () {
       if (xhr.readyState === 4) {
+        const res = {
+          xhr,
+          data: xhr.response,
+          config,
+          url,
+          params
+        }
         if (xhr.status === 200) {
-          resolve(interceptor.success(xhr))
+          resolve(interceptor.success(res))
         } else {
-          reject(interceptor.fail(xhr))
+          reject(interceptor.fail(res))
         }
       }
     };
