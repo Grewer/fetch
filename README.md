@@ -49,7 +49,7 @@ withCredentials | 请求时是否带上cookie,默认false | boolean
 fetch.get(url,data,config)
 fetch.post(url,data,config)
 fetch.put(url,data,config)
-fetch.delete(url,data,config)
+fetch.del(url,data,config)
 ```
 
 ### Usege

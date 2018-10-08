@@ -44,7 +44,7 @@ const Fetch = {
     params = json2str(params).substr(1);
     return this.ajax('put', url, params, config)
   },
-  delete(url, params, config) {
+  del(url, params, config) {
     params = this.config.transformRequest(params);
     url = transformUrl(url, params)
     return this.ajax('delete', url, null, config)
