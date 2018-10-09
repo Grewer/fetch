@@ -4,14 +4,14 @@ interface IParams {
 
 
 interface IConfig {
-  baseUrl: string
-  timeout: number
-  headers: {
+  baseUrl?: string
+  timeout?: number
+  headers?: {
     [key: string]: any
   }
-  transformRequest: () => IParams
-  responseType: string
-  withCredentials: boolean
+  transformRequest?: (IParams) => IParams
+  responseType?: string
+  withCredentials?: boolean
 }
 
 interface IResult {

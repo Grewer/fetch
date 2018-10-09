@@ -41,8 +41,7 @@ const Fetch = {
   },
   put(url, params, config) {
     params = this.config.transformRequest(params);
-    params = json2str(params).substr(1);
-    return this.ajax('put', url, params, config)
+    return this.ajax('put', url, JSON.stringify(params), config)
   },
   del(url, params, config) {
     params = this.config.transformRequest(params);
@@ -78,8 +77,12 @@ function xhr(type, url, params, config, interceptor) {
 
     xhr.open(type, url);
 
-    if ((type === 'post' && params.length) || type === 'put') {
+    if (type === 'post' && params.length) {
       xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    }
+
+    if (type === 'put') {
+      xhr.setRequestHeader("Content-type", "application/json");
     }
 
     // config start
@@ -87,8 +90,7 @@ function xhr(type, url, params, config, interceptor) {
     xhr.withCredentials = config.withCredentials;
     xhr.timeout = config.timeout;
     let headers = config.headers || {};
-    let headers_keys = Object.keys(headers);
-    headers_keys.forEach(i => {
+    Object.keys(headers).forEach(i => {
       xhr.setRequestHeader(i, headers[i])
     });
     // config end
