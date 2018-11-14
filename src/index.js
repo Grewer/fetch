@@ -50,13 +50,7 @@ const Fetch = {
   },
   ajax(type, url, params, config) {
     // 合并config
-    return xhr(type, url, params, config ? (
-        Object.keys(this.config).forEach(i => {
-          if (config[i] === void 0) {
-            config[i] = this.config[i]
-          }
-        }), config) : this.config
-      , this.interceptor)
+    return xhr(type, url, params, Object.assign(config, this.config), this.interceptor)
   },
   install(Vue, options) {
     try {
