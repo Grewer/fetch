@@ -48,7 +48,7 @@ const Fetch = {
     url = transformUrl(url, params)
     return this.ajax('delete', url, null, config)
   },
-  ajax(type, url, params, config) {
+  ajax(type, url, params, config = {}) {
     // 合并config
     return xhr(type, url, params, Object.assign(config, this.config), this.interceptor)
   },

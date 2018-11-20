@@ -1,6 +1,6 @@
 {
   "name": "gfetch",
-  "version": "2.3.2",
+  "version": "2.3.3",
   "description": "about ajax package",
   "main": "index.js",
   "repository": "https://github.com/Grewer/fetch.git",
@@ -18,7 +18,7 @@
   "dependencies": {},
   "scripts": {
     "build": "webpack --mode production",
-    "babel" : "babel src/index.js --out-file dist/test.js "
+    "babel": "babel src/index.js --out-file dist/test.js "
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
