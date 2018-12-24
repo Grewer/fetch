@@ -3,7 +3,7 @@ interface IParams {
 }
 
 
-interface IConfig {
+export interface IConfig {
   baseUrl?: string
   timeout?: number
   headers?: {
@@ -14,7 +14,7 @@ interface IConfig {
   withCredentials?: boolean
 }
 
-interface IResult {
+export interface IResult {
   data: any
   xhr: XMLHttpRequest
   params?: IParams
@@ -22,7 +22,7 @@ interface IResult {
   config: IConfig
 }
 
-type IFFetch = (url: string, params?: IParams, config?: IConfig) => Promise<IResult>
+export type IFFetch = (url: string, params?: IParams, config?: IConfig) => Promise<IResult>
 
 declare namespace fetch {
   const get: IFFetch
