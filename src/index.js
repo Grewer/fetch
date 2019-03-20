@@ -50,7 +50,7 @@ const Fetch = {
   },
   ajax(type, url, params, config = {}) {
     // 合并config
-    return xhr(type, url, params, Object.assign(config, this.config), this.interceptor)
+    return xhr(type, url, params, Object.assign({}, this.config, config), this.interceptor)
   },
   install(Vue, options) {
     try {
