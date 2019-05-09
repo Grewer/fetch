@@ -64,6 +64,10 @@ const Fetch = {
     }
 };
 
+function CheckIEJSON(config, xhr) {
+    return config.responseType === 'json' && typeof xhr.response === 'string' ? JSON.parse(xhr.response) : xhr.response;
+}
+
 function xhr(type, url, params, config, interceptor) {
     return new Promise((resolve, reject) => {
         let xhr = new XMLHttpRequest();
@@ -97,17 +101,17 @@ function xhr(type, url, params, config, interceptor) {
         }
 
         xhr.onload = ev => {
-            res.data = xhr.response;
+            res.data = CheckIEJSON(config, xhr);
             resolve(interceptor.success(res))
         }
 
         xhr.onerror = ev => {
-            res.data = xhr.response;
+            res.data = CheckIEJSON(config, xhr);
             reject(interceptor.fail(res))
         }
         xhr.ontimeout = ev => {
             res.timeout = true
-            res.data = xhr.response;
+            res.data = CheckIEJSON(config, xhr);
             reject(interceptor.fail(res))
         }
 
