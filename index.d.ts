@@ -1,5 +1,5 @@
 interface IParams {
-  [key: string]: string | number
+  [key: string]: string | number | any[]
 }
 
 
