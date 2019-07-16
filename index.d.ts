@@ -2,6 +2,12 @@ interface IParams {
   [key: string]: string | number | any[]
 }
 
+type EventHandle = (target: EventTarget,
+                    type: string,
+                    bubbles: boolean,
+                    cancelable: boolean,
+                    lengthComputable: boolean) => void
+
 
 export interface IConfig {
   baseUrl?: string
@@ -12,6 +18,7 @@ export interface IConfig {
   transformRequest?: (IParams) => IParams
   responseType?: string
   withCredentials?: boolean
+  upload?: Record<'onloadstart' | 'onprogress' | 'onabort' | 'onerror' | 'onload' | 'ontimeout' | 'onloadend', EventHandle>
 }
 
 export interface IResult {

@@ -19,7 +19,8 @@ const Fetch = {
         headers: {},
         timeout: 10000,
         responseType: 'json',
-        withCredentials: false
+        withCredentials: false,
+        upload: null
     },
     interceptor: {
         success(data) {
@@ -99,6 +100,8 @@ function xhr(type, url, params, config, interceptor) {
             params,
             timeout: false
         }
+
+        config.upload && (xhr.upload = config.upload)
 
         xhr.onload = ev => {
             res.data = CheckIEJSON(config, xhr);
