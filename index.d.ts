@@ -18,7 +18,7 @@ export interface IConfig {
   transformRequest?: (IParams) => IParams
   responseType?: string
   withCredentials?: boolean
-  upload?: Record<'onloadstart' | 'onprogress' | 'onabort' | 'onerror' | 'onload' | 'ontimeout' | 'onloadend', EventHandle>
+  upload?: Partial<Record<'onloadstart' | 'onprogress' | 'onabort' | 'onerror' | 'onload' | 'ontimeout' | 'onloadend', EventHandle>>
 }
 
 export interface IResult {
