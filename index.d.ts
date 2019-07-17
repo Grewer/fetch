@@ -1,6 +1,6 @@
-interface IParams {
+type IParams = {
   [key: string]: string | number | any[]
-}
+} | FormData
 
 type EventHandle = (target: EventTarget,
                     type: string,
