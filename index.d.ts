@@ -1,5 +1,5 @@
 type IParams = {
-  [key: string]: string | number | any[] | undefined
+  [key: string]: any
 } | FormData
 
 type EventHandle = (target: EventTarget,
