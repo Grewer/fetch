@@ -66,7 +66,11 @@ const Fetch = {
 };
 
 function CheckIEJSON(config, xhr) {
-    return config.responseType === 'json' && typeof xhr.response === 'string' ? JSON.parse(xhr.response) : xhr.response;
+    try {
+        return config.responseType === 'json' && typeof xhr.response === 'string' ? JSON.parse(xhr.response) : xhr.response;
+    } catch (e) {
+        return xhr.response
+    }
 }
 
 function xhr(type, url, params, config, interceptor) {
